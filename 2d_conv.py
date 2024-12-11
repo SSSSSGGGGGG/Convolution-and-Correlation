@@ -41,9 +41,9 @@ Example: If fillvalue=0, the padded area is filled with zeros.
 If fillvalue=255, the padding will be white if treating the array as a grayscale image.
 """
 
-im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H180_128_128_S.png")
-im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H0_128_128_S.png")
-im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_128_128_S.png")
+im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H180_50_70_130_S.png")
+im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H0_50_70_130_S.png")
+im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_50_75_130_S.png")
 
 def conv(ima,imb):
     output = convolve2d(ima[:,:,0], imb[:,:,0], mode='same', boundary='fill', fillvalue=0)
