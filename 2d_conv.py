@@ -41,37 +41,46 @@ Example: If fillvalue=0, the padded area is filled with zeros.
 If fillvalue=255, the padding will be white if treating the array as a grayscale image.
 """
 
-im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H180_50_70_130_S.png")
-im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H0_50_70_130_S.png")
-im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_50_75_130_S.png")
-
+im1=plt.imread("C:/Users/gaosh/Documents/python/Convolution-and-Correlation/lotus_H180_71_S.png")
+im2=plt.imread("C:/Users/gaosh/Documents/python/Convolution-and-Correlation/In_square_S.png")
+im3=plt.imread("C:/Users/gaosh/Documents/python/Convolution-and-Correlation/square_S.png")
+im4=plt.imread("C:/Users/gaosh/Documents/python/Convolution-and-Correlation/lotus_H0_71_S.png")
 def conv(ima,imb):
     output = convolve2d(ima[:,:,0], imb[:,:,0], mode='same', boundary='fill', fillvalue=0)
     return output
+def conv_full(ima,imb):
+    output = convolve2d(ima[:,:,0], imb[:,:,0], mode='full', boundary='fill', fillvalue=0)
+    return output
 
-conv1=conv(im2,im2)
+conv1=conv(im1,im4)
 plt.figure()
 plt.imshow(conv1,cmap="Reds")
 plt.colorbar()
 plt.title("horizontal convolution im2")
 
-corr1=conv(im1,im2)
+conv1_F=conv_full(im1,im4)
 plt.figure()
-plt.imshow(corr1,cmap="Reds")
+plt.imshow(conv1_F,cmap="Reds")
 plt.colorbar()
-plt.title("horizontal correlation im1,im2")
+plt.title("Full horizontal convolution im2")
 
-conv2=conv(im2,im3)
-plt.figure()
-plt.imshow(conv2,cmap="Reds")
-plt.colorbar()
-plt.title("H and V convolution im2,im3")
+# corr1=conv(im1,im2)
+# plt.figure()
+# plt.imshow(corr1,cmap="Reds")
+# plt.colorbar()
+# plt.title("horizontal correlation im1,im2")
 
-corr2=conv(im1,im3)
-plt.figure()
-plt.imshow(corr2,cmap="Reds")
-plt.colorbar()
-plt.title("H and V correlation im1,im3")
+# conv2=conv(im2,im3)
+# plt.figure()
+# plt.imshow(conv2,cmap="Reds")
+# plt.colorbar()
+# plt.title("H and V convolution im2,im3")
+
+# corr2=conv(im1,im3)
+# plt.figure()
+# plt.imshow(corr2,cmap="Reds")
+# plt.colorbar()
+# plt.title("H and V correlation im1,im3")
 
 plt.figure()
 plt.imshow(im1,cmap="Reds")
