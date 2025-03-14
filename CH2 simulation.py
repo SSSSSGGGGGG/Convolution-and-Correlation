@@ -10,16 +10,16 @@ from scipy.fftpack import ifft2, ifftshift, fft2,fftshift
 import matplotlib.pyplot as plt
 
 im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_center.png")
-im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_FH_0_S.png")
-im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_S.png")
-im4=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_FH_180_S.png")
+im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H_0_s.png")
+im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_s.png")
+im4=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H_180_s.png")
 
+h,w=im1[:,:,0].shape
 im1shift=fftshift(im1[:,:,0])
 im2shift=fftshift(im2[:,:,0]) 
 im3shift=fftshift(im3[:,:,0]) 
 im4shift=fftshift(im4[:,:,0])
 
-h,w=im1shift.shape
 """No noise"""
 file1="No niose"
 
