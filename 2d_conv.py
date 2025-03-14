@@ -8,6 +8,8 @@ Created on Wed Feb 14 11:28:11 2024
 import os
 from scipy.signal import convolve2d
 import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.patches import Rectangle
 """
 'full':
 The output contains all possible overlaps of the input and the kernel.
@@ -41,58 +43,85 @@ Example: If fillvalue=0, the padded area is filled with zeros.
 If fillvalue=255, the padding will be white if treating the array as a grayscale image.
 """
 
-im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_FH_180_S.png")
-im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_V_S.png")
-# im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/square_S.png")
+im1=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_center.png")
+im2=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_center.png")
+im3=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_center_180.png")
 # im4=plt.imread("C:/Users/Laboratorio/Conv and Corr/lotus_H180_128_128_S.png")
 def conv(ima,imb):
     output = convolve2d(ima[:,:,0], imb[:,:,0], mode='same', boundary='fill', fillvalue=0)
     return output
-def conv_full(ima,imb):
-    output = convolve2d(ima[:,:,0], imb[:,:,0], mode='full', boundary='fill', fillvalue=0)
-    return output
+# def conv_full(ima,imb):
+#     output = convolve2d(ima[:,:,0], imb[:,:,0], mode='full', boundary='fill', fillvalue=0)
+#     return output
 
-conv1=conv(im1,im2)
-plt.figure()
-plt.imshow(conv1,cmap="Reds")
-plt.colorbar()
-# plt.title("horizontal convolution im2")
 
-conv1_F=conv_full(im1,im2)
-plt.figure()
-plt.imshow(conv1_F,cmap="Reds")
-plt.colorbar()
-# plt.title("Full horizontal convolution im2")
+# Correlation:invert image manually.
+corr_result=conv(im1,im3)
+h,w=corr_result.shape
+x = np.arange(w//2-50, w//2+50)  
+y = np.arange(h//2-50, h//2+50) 
+X,Y=np.meshgrid(x,y)
 
-# corr1=conv(im1,im2)
-# plt.figure()
-# plt.imshow(corr1,cmap="Reds")
-# plt.colorbar()
-# plt.title("horizontal correlation im1,im2")
-
-# conv2=conv(im2,im3)
-# plt.figure()
-# plt.imshow(conv2,cmap="Reds")
-# plt.colorbar()
-# plt.title("H and V convolution im2,im3")
-
-# corr2=conv(im1,im3)
-# plt.figure()
-# plt.imshow(corr2,cmap="Reds")
-# plt.colorbar()
-# plt.title("H and V correlation im1,im3")
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, corr_result[h//2-50: h//2+50,w//2-50: w//2+50], cmap='jet')
+ax.set_zlim(0, corr_result.max()) 
+ax.view_init(elev=30, azim=135) 
+plt.show()
 
 plt.figure()
-plt.imshow(im1,cmap="Reds")
+plt.imshow(corr_result,vmax=np.max(corr_result),cmap="hot")
+# Get the current axis
+ax = plt.gca()
+# Add a visible border around the image
+border = Rectangle((0, 0), corr_result.shape[1]-1, corr_result.shape[0]-1,linewidth=0.5, edgecolor='black', facecolor='none')
+ax.add_patch(border)
+# Hide axis (ticks and labels)
+ax.set_xticks([])
+ax.set_yticks([])
+ax.set_frame_on(False)  # Removes axis frame
 plt.colorbar()
-# plt.title("im1")
+plt.title("Correlate")
+plt.show()
+
+"""# convolution"""
+conv_result=conv(im1,im2)
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, conv_result[h//2-50: h//2+50,w//2-50: w//2+50], cmap='jet')
+ax.set_zlim(0, corr_result.max()) 
+ax.view_init(elev=30, azim=135) 
+plt.show()
 
 plt.figure()
-plt.imshow(im2,cmap="Reds")
+plt.imshow(conv_result,vmax=np.max(corr_result),cmap="hot")
+# Get the current axis
+ax = plt.gca()
+# Add a visible border around the image
+border = Rectangle((0, 0), corr_result.shape[1]-1, corr_result.shape[0]-1,linewidth=0.5, edgecolor='black', facecolor='none')
+ax.add_patch(border)
+# Hide axis (ticks and labels)
+ax.set_xticks([])
+ax.set_yticks([])
+ax.set_frame_on(False)  # Removes axis frame
 plt.colorbar()
-# plt.title("im4")
+plt.title("Convolve")
+plt.show()
 
 # plt.figure()
-# plt.imshow(im3,cmap="Reds")
+# plt.imshow(im1,cmap="gray")
+# plt.axis("off")
 # plt.colorbar()
-# plt.title("im3")
+
+
+# plt.figure()
+# plt.imshow(im2,cmap="gray")
+# plt.axis("off")
+# plt.colorbar()
+
+
+# plt.figure()
+# plt.imshow(im3,cmap="gray")
+# plt.colorbar()
+# plt.axis("off")
