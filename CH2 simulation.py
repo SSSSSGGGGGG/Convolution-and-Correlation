@@ -55,12 +55,12 @@ I_cor3=abs(In_FT_cor3)**2
 max_=I_cor1.max()
 
 def plotim(I_con,I_cor,t):
-    plt.figure()
-    plt.imshow(I_con,vmax=max_,cmap="hot")
-    plt.colorbar()
-    plt.axis("off")
-    plt.savefig(f"Convolution {file1} {t}.png", dpi=300, bbox_inches="tight")
-    plt.close()
+    # plt.figure()
+    # plt.imshow(I_con,vmax=max_,cmap="hot")
+    # plt.colorbar()
+    # plt.axis("off")
+    # plt.savefig(f"Convolution {file1} {t}.png", dpi=300, bbox_inches="tight")
+    # plt.close()
     
     x = np.arange(0, w)  
     y = np.arange(0, h) 
@@ -73,15 +73,18 @@ def plotim(I_con,I_cor,t):
     ax.view_init(elev=35, azim=-45) 
     ax.set_xlabel("x")
     ax.set_ylabel("y")
-    plt.savefig(f"Convolution {file1} {t} 3d.png", dpi=300, bbox_inches="tight")
+    ax.set_facecolor('none')  # Makes the 3D axis background transparent
+    fig.patch.set_alpha(0)  # Makes the figure background transparent
+    # Save figure with transparent background
+    plt.savefig(f"Convolution {file1} {t} 3d.png", dpi=300, bbox_inches="tight", transparent=True)
     plt.close()
     
-    plt.figure()
-    plt.imshow(I_cor,vmax=max_,cmap="hot")
-    plt.colorbar()
-    plt.axis("off")
-    plt.savefig(f"Correlation {file1} {t}.png", dpi=300, bbox_inches="tight")
-    plt.close()
+    # plt.figure()
+    # plt.imshow(I_cor,vmax=max_,cmap="hot")
+    # plt.colorbar()
+    # plt.axis("off")
+    # plt.savefig(f"Correlation {file1} {t}.png", dpi=300, bbox_inches="tight")
+    # plt.close()
     
     fig2 = plt.figure()
     ax2 = fig2.add_subplot(111, projection='3d')
@@ -90,7 +93,9 @@ def plotim(I_con,I_cor,t):
     ax2.set_xlabel("x")
     ax2.set_ylabel("y")
     ax2.view_init(elev=35, azim=-45) 
-    plt.savefig(f"Correlation {file1} {t} 3d.png", dpi=300, bbox_inches="tight")
+    ax2.set_facecolor('none')  # Makes the 3D axis background transparent
+    fig2.patch.set_alpha(0) 
+    plt.savefig(f"Correlation {file1} {t} 3d.png", dpi=300, bbox_inches="tight", transparent=True)
     plt.close()
 plot1=plotim(I_con1, I_cor1, 1)
 plot2=plotim(I_con2, I_cor2, 2)

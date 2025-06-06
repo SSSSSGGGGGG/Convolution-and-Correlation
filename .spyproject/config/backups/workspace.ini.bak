@@ -4,7 +4,7 @@ save_data_on_exit = True
 save_history = True
 save_non_project_files = False
 project_type = 'empty-project-type'
-recent_files = ['2d_conv.py', 'FT_Corr_Conv.py', 'CH2 simulation.py']
+recent_files = ['2d_conv.py', 'FT_Corr_Conv.py', 'CH9 simulation.py', 'CH2 simulation.py']
 
 [main]
 version = 0.2.0
