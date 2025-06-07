@@ -1,0 +1,1 @@
+Simulates the convolution and correlation of two general patterns, and the correlator response to the phase difference. A triplicator holograms are applied to realize a snapshot of convolver and correlator, which is useful for detecting the likeness of input signals/images, and currently this idea has been applied to CNN deep learning.
